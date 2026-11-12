@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen: Gestión del Montaje y Mantenimiento de Instalaciones Eléctricas</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --error: #dc2626;
+      --error-bg: #fee2e2;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), #0f172a);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 1.35rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      max-width: 650px;
+      margin: 0 auto;
+      backdrop-filter: blur(8px);
+      font-size: 0.9rem;
+    }
+
+    .stat-item span {
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 160px;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--primary-light);
+      color: var(--primary-light);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
+      gap: 0.75rem;
+    }
+
+    .btn-action {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: white;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .btn-action:hover {
+      background: #f1f5f9;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      transition: border-color 0.2s;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge {
+      background: #e0e7ff;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .question-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .symbol-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 1.2rem;
+      margin: 0.5rem 0 1rem 0;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary-light);
+      background: #f8fafc;
+    }
+
+    .option-letter {
+      font-weight: 700;
+      margin-right: 0.75rem;
+      min-width: 24px;
+      color: var(--primary);
+    }
+
+    .option-btn.correct {
+      background-color: var(--success-bg);
+      border-color: var(--success);
+      color: #065f46;
+      font-weight: 600;
+    }
+
+    .option-btn.incorrect {
+      background-color: var(--error-bg);
+      border-color: var(--error);
+      color: #991b1b;
+    }
+
+    .option-btn.selected-multi {
+      border-color: var(--primary-light);
+      background-color: #eff6ff;
+    }
+
+    .feedback {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .feedback.correct {
+      display: block;
+      background: var(--success-bg);
+      color: #065f46;
+    }
+
+    .feedback.incorrect {
+      display: block;
+      background: var(--error-bg);
+      color: #991b1b;
+    }
+
+    .verify-multi-btn {
+      margin-top: 0.8rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .open-area {
+      width: 100%;
+      min-height: 130px;
+      padding: 0.85rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+      margin-top: 0.5rem;
+      background: #fcfcfd;
+    }
+
+    .open-area:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      background: #fff;
+    }
+
+    .guide-toggle {
+      margin-top: 0.75rem;
+      background: none;
+      border: 1px dashed var(--primary-light);
+      color: var(--primary);
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .guide-box {
+      margin-top: 0.75rem;
+      padding: 1rem;
+      background: #f0f9ff;
+      border-left: 4px solid var(--primary-light);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Gestión del Montaje y Mantenimiento de Instalaciones Eléctricas</h1>
+  <p>Simulador de Examen y Cuaderno de Ejercicios Prácticos</p>
+  <div class="stats-bar">
+    <div class="stat-item">Respondidas: <span id="stat-answered">0</span> / <span id="stat-total">52</span></div>
+    <div class="stat-item" style="color: #86efac;">Aciertos: <span id="stat-correct">0</span></div>
+    <div class="stat-item" style="color: #fca5a5;">Fallos: <span id="stat-wrong">0</span></div>
+    <div class="stat-item">Nota Test: <span id="stat-score">0.00</span> / 10</div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="filterSection('all', this)">Todo el Examen (60)</button>
+    <button class="tab-btn" onclick="filterSection('b1', this)">1. Proyectos Técnicos (23)</button>
+    <button class="tab-btn" onclick="filterSection('b2', this)">2. Aprovisionamiento (19)</button>
+    <button class="tab-btn" onclick="filterSection('b3', this)">3. Gestión de Almacén (10)</button>
+    <button class="tab-btn" onclick="filterSection('b4', this)">4. Desarrollo y Cálculo (8)</button>
+  </div>
+
+  <div class="controls">
+    <button class="btn-action" onclick="resetQuiz()">🔄 Reiniciar Examen</button>
+  </div>
+
+  <div id="questions-container"></div>
+</div>
+
+<script>
+const questions = [
+  // BLOQUE 1: PROYECTOS TÉCNICOS (23 preguntas)
+  {
+    id: 1, section: 'b1', category: 'Proyectos Técnicos - Pregunta 1',
+    type: 'single',
+    question: 'El siguiente símbolo representa:',
+    svg: `<div class="symbol-box"><svg width="90" height="36" viewBox="0 0 100 40"><path d="M 10 25 Q 30 -5, 50 20 T 90 15" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/></svg></div>`,
+    options: [
+      'Puesta a tierra',
+      'Red eléctrica inestable por fluctuaciones',
+      'Corriente Continua',
+      'Corriente Alterna'
+    ],
+    correct: 3
+  },
+  {
+    id: 2, section: 'b1', category: 'Proyectos Técnicos - Pregunta 2',
+    type: 'single',
+    question: 'Parte del proyecto técnico que tiene un carácter expositivo y sirve como introducción y enlace de toda la información contenida en el proyecto.',
+    options: ['Memoria técnica', 'Presupuesto', 'Pliego de condiciones', 'Anexo explicativo'],
+    correct: 0
+  },
+  {
+    id: 3, section: 'b1', category: 'Proyectos Técnicos - Pregunta 3',
+    type: 'single',
+    question: 'En él se justifican y recogen los cálculos efectuados para la redacción de proyecto:',
+    options: ['Estudio geotécnico', 'Estudio económico', 'Presupuesto', 'Anexo de cálculos'],
+    correct: 3
+  },
+  {
+    id: 4, section: 'b1', category: 'Proyectos Técnicos - Pregunta 4',
+    type: 'single',
+    question: 'La escala 20:1 es una escala de...',
+    options: ['Reducción', 'Natural', 'Normalización', 'Ampliación'],
+    correct: 3
+  },
+  {
+    id: 5, section: 'b1', category: 'Proyectos Técnicos - Pregunta 5',
+    type: 'single',
+    question: 'Organismo que se creó en 1973 en Bélgica y se encarga de redactar las normas voluntarias en el campo de la ingeniería Electrotécnica:',
+    options: [
+      'No existe tal organismo',
+      'IEEE (Instituto de Ingenieros eléctricos y electrónicos)',
+      'CENELEC (Comité Europeo de Normalización Electrotécnica)',
+      'CEN (Comité Europeo de Normalización)'
+    ],
+    correct: 2
+  },
+  {
+    id: 6, section: 'b1', category: 'Proyectos Técnicos - Pregunta 6',
+    type: 'single',
+    question: 'Plano que permite localizar con mayor precisión la ubicación del emplazamiento objeto del proyecto. Se utilizan escalas entre 1:200 y 1:2000.',
+    options: [
+      'Planos descriptivos de la situación actual',
+      'Plano de localización',
+      'Plano de Emplazamiento',
+      'Planos de GoogleMaps'
+    ],
+    correct: 2
+  },
+  {
+    id: 7, section: 'b1', category: 'Proyectos Técnicos - Pregunta 7',
+    type: 'single',
+    question: 'El visado, la solicitud de permisos y licencias forma parte de...',
+    options: ['...el anteproyecto', '...la tramitación del proyecto', '...la ejecución de las obras', '...el estudio previo'],
+    correct: 1
+  },
+  {
+    id: 8, section: 'b1', category: 'Proyectos Técnicos - Pregunta 8',
+    type: 'single',
+    question: 'El elemento fundamental de un presupuesto es:',
+    options: ['La unidad de obra', 'El precio Unitario', 'Las partidas', 'La medición'],
+    correct: 0
+  },
+  {
+    id: 9, section: 'b1', category: 'Proyectos Técnicos - Pregunta 9',
+    type: 'single',
+    question: 'En un plano a escala 1:100, una pared mide 4 cm. ¿Cuál es su longitud real?',
+    options: ['0,4 m', 'Ninguna respuesta es correcta', '4 m', '40 m'],
+    correct: 2
+  },
+  {
+    id: 10, section: 'b1', category: 'Proyectos Técnicos - Pregunta 10',
+    type: 'single',
+    question: '¿Qué se entiende por “escala natural”?',
+    options: [
+      'Cuando el objeto se representa con su tamaño real.',
+      'Cuando el objeto se reduce para ajustarse al formato del papel.',
+      'Cuando el objeto se amplía para destacar detalles.',
+      'Cuando el objeto se representa al doble de su tamaño real.'
+    ],
+    correct: 0
+  },
+  {
+    id: 11, section: 'b1', category: 'Proyectos Técnicos - Pregunta 11',
+    type: 'single',
+    question: '¿Cuál es el principal objetivo de elaborar un presupuesto en la gestión de proyectos?',
+    options: [
+      'Justificar los gastos ante el cliente.',
+      'Estimar los costes y recursos necesarios para alcanzar los objetivos del proyecto.',
+      'Reducir los plazos de ejecución.',
+      'Aumentar la rentabilidad de forma automática.'
+    ],
+    correct: 1
+  },
+  {
+    id: 12, section: 'b1', category: 'Proyectos Técnicos - Pregunta 12',
+    type: 'single',
+    question: 'El documento que regula las relaciones entre el propietario, promotor del proyecto y los contratistas encargados de su ejecución es...',
+    options: ['Memoria', 'Pliego de condiciones', 'Anexo de Cálculos', 'Presupuesto'],
+    correct: 1
+  },
+  {
+    id: 13, section: 'b1', category: 'Proyectos Técnicos - Pregunta 13',
+    type: 'single',
+    question: 'Si un plano está a escala 1:50, significa que:',
+    options: [
+      '50 cm en el plano equivalen a 1 m real.',
+      '1 cm en el plano equivale a 50 cm reales.',
+      'Ninguna respuesta es correcta',
+      '50 cm en el plano equivalen a 1 cm real.'
+    ],
+    correct: 1
+  },
+  {
+    id: 14, section: 'b1', category: 'Proyectos Técnicos - Pregunta 14',
+    type: 'single',
+    question: 'Está compuesto por el resultado de multiplicar el precio unitario de cada unidad por su medición correspondiente, además del presupuesto de estudio de Seguridad y Salud si procede. Sin incluir gastos generales, margen de beneficios, honorarios profesionales, ni impuestos:',
+    options: [
+      'Presupuesto simplificado',
+      'Presupuesto definitivo',
+      'Presupuesto de ejecución material',
+      'Presupuesto de contrata'
+    ],
+    correct: 2
+  },
+  {
+    id: 15, section: 'b1', category: 'Proyectos Técnicos - Pregunta 15',
+    type: 'single',
+    question: '¿Qué se entiende por coste directo dentro de un presupuesto de proyecto?',
+    options: [
+      'El que está vinculado de forma específica con una actividad o producto del proyecto.',
+      'El que depende del resultado financiero final.',
+      'El que no se puede asociar directamente a una tarea concreta.',
+      'Aquel que se reparte proporcionalmente entre todas las actividades.'
+    ],
+    correct: 0
+  },
+  {
+    id: 16, section: 'b1', category: 'Proyectos Técnicos - Pregunta 16 (Respuesta Múltiple)',
+    type: 'multiple',
+    question: 'Indica qué partes corresponden a la Memoria Técnica (Selecciona todas las correctas y pulsa Comprobar):',
+    options: [
+      'Emplazamiento o localización',
+      'Disposiciones generales',
+      'Necesidades',
+      'Reglamentación'
+    ],
+    correct: [0, 2, 3]
+  },
+  {
+    id: 17, section: 'b1', category: 'Proyectos Técnicos - Pregunta 17',
+    type: 'single',
+    question: 'Contrato mediante el cual no es posible modificar el precio inicial de la obra aunque aumente el precio de los materiales o la mano de obra. Solo podrá hacerse si se realizan modificaciones sobre el proyecto inicial:',
+    options: [
+      'Contrato de obra con suministro de materiales',
+      'Contrato por administración',
+      'Contrato de obra por unidad de medida',
+      'Contrato de obra a precio alzado'
+    ],
+    correct: 3
+  },
+  {
+    id: 18, section: 'b1', category: 'Proyectos Técnicos - Pregunta 18',
+    type: 'single',
+    question: 'El presupuesto de contrata es...',
+    options: [
+      '...se obtiene sumando los costes de los materiales a los costes del estudio de seguridad y salud.',
+      'No existe un presupuesto de contrata',
+      '...es el resultado de multiplicar el precio unitario de cada unidad de obra por su medición correspondiente.',
+      '...el resultado de sumar el presupuesto de ejecución material, los gastos generales de la empresa, el IVA y el beneficio industrial.'
+    ],
+    correct: 3
+  },
+  {
+    id: 19, section: 'b1', category: 'Proyectos Técnicos - Pregunta 19',
+    type: 'single',
+    question: 'Identifica y valora el impacto de la instalación tanto durante su fase de construcción como durante su funcionamiento sobre factores como el suelo, el aire, el agua, la vegetación, la fauna...',
+    options: [
+      'Estudio de impacto ambiental',
+      'Pliego de condiciones',
+      'Plan de seguridad natural',
+      'Estudio de seguridad y salud'
+    ],
+    correct: 0
+  },
+  {
+    id: 20, section: 'b1', category: 'Proyectos Técnicos - Pregunta 20',
+    type: 'single',
+    question: 'Documento que redacta periódicamente el contratista, y que debe ser ratificado por la dirección facultativa, en el que se indica el grado de ejecución del proyecto en cada una de sus partidas, así como su valoración:',
+    options: [
+      'Certificado final de obra',
+      'Certificación de obra',
+      'Presupuesto',
+      'Boletín de instalación'
+    ],
+    correct: 1
+  },
+  {
+    id: 21, section: 'b1', category: 'Proyectos Técnicos - Pregunta 21',
+    type: 'single',
+    question: 'El proyecto estará compuesto al menos de los siguientes documentos:',
+    options: [
+      'Memoria descriptiva, Pliego de condiciones, Presupuesto, Planos y esquemas.',
+      'Pliego de condiciones, Presupuesto, Planos y esquemas, Estudio Básico de Seguridad',
+      'Únicamente son necesarios el Pliego de condiciones y los Planos',
+      'Memoria descriptiva, Pliego de condiciones, Presupuesto, Planos y esquemas, Anexo de Cálculo'
+    ],
+    correct: 0
+  },
+  {
+    id: 22, section: 'b1', category: 'Proyectos Técnicos - Pregunta 22',
+    type: 'single',
+    question: 'Normativa que afecta a los proyectos de instalaciones en baja tensión:',
+    options: [
+      'Código Técnico de la Edificación',
+      'Reglamento de conductores',
+      'Reglamento sobre condiciones técnicas y garantías de seguridad en líneas eléctricas de Alta Tensión',
+      'Reglamento Electrotécnico para Baja Tensión'
+    ],
+    correct: 3
+  },
+  {
+    id: 23, section: 'b1', category: 'Proyectos Técnicos - Pregunta 23',
+    type: 'single',
+    question: 'Representación gráfica de objetos e instalaciones mediante símbolos que no se realizan a escala:',
+    options: ['Esquemas', 'Símbolos', 'Planos', 'Diagramas'],
+    correct: 0
+  },
+
+  // BLOQUE 2: APROVISIONAMIENTO (19 preguntas)
+  {
+    id: 24, section: 'b2', category: 'Aprovisionamiento - Pregunta 1',
+    type: 'single',
+    question: 'El stock de seguridad se utiliza para:',
+    options: [
+      'Aumentar el volumen de compras',
+      'Reducir el número de pedidos.',
+      'Evitar el control de existencias.',
+      'Cubrir incidencias imprevistas de suministro'
+    ],
+    correct: 3
+  },
+  {
+    id: 25, section: 'b2', category: 'Aprovisionamiento - Pregunta 2',
+    type: 'single',
+    question: 'Durante la recepción de material, se detecta que varios magnetotérmicos no cumplen las características del proyecto. ¿Qué actuación es correcta?',
+    options: [
+      'Almacenarlos como stock',
+      'Modificar el proyecto.',
+      'Instalarlos igualmente.',
+      'Registrar la incidencia y gestionar la devolución'
+    ],
+    correct: 3
+  },
+  {
+    id: 26, section: 'b2', category: 'Aprovisionamiento - Pregunta 3',
+    type: 'single',
+    question: 'Durante el montaje, falta canalización porque se consumió más de lo previsto. ¿Qué herramienta habría permitido anticipar este problema?',
+    options: [
+      'El inventario anual.',
+      'Factura',
+      'Albarán',
+      'Diagrama de Gantt actualizado.'
+    ],
+    correct: 3
+  },
+  {
+    id: 27, section: 'b2', category: 'Aprovisionamiento - Pregunta 4',
+    type: 'single',
+    question: '¿Con quién debe coordinarse principalmente la gestión del aprovisionamiento?',
+    options: [
+      'La administración pública.',
+      'El proveedor.',
+      'El cliente.',
+      'El equipo de montaje.'
+    ],
+    correct: 3
+  },
+  {
+    id: 28, section: 'b2', category: 'Aprovisionamiento - Pregunta 5',
+    type: 'single',
+    question: 'El error frecuente en obras pequeñas es:',
+    options: [
+      'Coordinar montaje y suministro',
+      'No documentar pedidos ni recepciones',
+      'Controlar el stock.',
+      'Planificar compras'
+    ],
+    correct: 1
+  },
+  {
+    id: 29, section: 'b2', category: 'Aprovisionamiento - Pregunta 6',
+    type: 'single',
+    question: 'El control de stock en una obra es responsabilidad directa de:',
+    options: [
+      'El equipo de montaje.',
+      'La persona responsable de la gestión de obra.',
+      'El proveedor.',
+      'El cliente.'
+    ],
+    correct: 1
+  },
+  {
+    id: 30, section: 'b2', category: 'Aprovisionamiento - Pregunta 7',
+    type: 'single',
+    question: 'El albarán sirve principalmente para:',
+    options: [
+      'Justificar el pago.',
+      'Calcular el presupuesto',
+      'Verificar la mercancía recibida',
+      'Planificar compras futuras.'
+    ],
+    correct: 2
+  },
+  {
+    id: 31, section: 'b2', category: 'Aprovisionamiento - Pregunta 8',
+    type: 'single',
+    question: 'En un proyecto eléctrico, la previsión de necesidades debe realizarse:',
+    options: [
+      'De forma continua y ajustada a la planificación.',
+      'Una sola vez al inicio de la obra.',
+      'Solo cuando se detecte falta de material',
+      'Tras finalizar el montaje de la instalación'
+    ],
+    correct: 0
+  },
+  {
+    id: 32, section: 'b2', category: 'Aprovisionamiento - Pregunta 9',
+    type: 'single',
+    question: 'En una obra industrial, el responsable decide pedir todo el material al inicio “para no quedarse corto”. ¿Qué consecuencia técnica es más probable?',
+    options: [
+      'Mayor seguridad en la obra.',
+      'Incremento de costes y riesgo de deterioro.',
+      'Mejora el ritmo del montaje.',
+      'Se reducen los plazos de ejecución.'
+    ],
+    correct: 1
+  },
+  {
+    id: 33, section: 'b2', category: 'Aprovisionamiento - Pregunta 10',
+    type: 'single',
+    question: 'La planificación del aprovisionamiento tiene como finalidad principal:',
+    options: [
+      'Comprar el material al menor precio posible',
+      'Garantizar continuidad del montaje sin interrupciones',
+      'Evitar cualquier tipo de almacenamiento',
+      'Centralizar todas las compras en un único proveedor'
+    ],
+    correct: 1
+  },
+  {
+    id: 34, section: 'b2', category: 'Aprovisionamiento - Pregunta 11',
+    type: 'single',
+    question: 'Un error habitual en la gestión del aprovisionamiento es:',
+    options: [
+      'Verificar la mercancía cuando se recibe',
+      'Coordinar compras y planificación',
+      'Ajustar el suministro a la secuencia de montaje',
+      'Compra de material sin considerar los plazos de entrega.'
+    ],
+    correct: 3
+  },
+  {
+    id: 35, section: 'b2', category: 'Aprovisionamiento - Pregunta 12',
+    type: 'single',
+    question: '¿Cuál es el documento que formaliza legalmente la solicitud de materiales al proveedor?',
+    options: ['Albarán.', 'Presupuesto.', 'Pedido.', 'Inventario'],
+    correct: 2
+  },
+  {
+    id: 36, section: 'b2', category: 'Aprovisionamiento - Pregunta 13',
+    type: 'single',
+    question: 'El uso del sistema Just-In-Time en una obra eléctrica es recomendable cuando:',
+    options: [
+      'El suministro es fiable y la planificación precisa',
+      'Los materiales son voluminosos y baratos.',
+      'El montaje es improvisado.',
+      'No existe planificación previa'
+    ],
+    correct: 0
+  },
+  {
+    id: 37, section: 'b2', category: 'Aprovisionamiento - Pregunta 14',
+    type: 'single',
+    question: 'En una obra de instalaciones eléctricas industriales, el proceso de aprovisionamiento debe iniciarse a partir de:',
+    options: [
+      'El stock existente en almacén',
+      'La disponibilidad del proveedor habitual',
+      'El proyecto técnico y la planificación temporal del montaje',
+      'El presupuesto cerrado con el cliente'
+    ],
+    correct: 2
+  },
+  {
+    id: 38, section: 'b2', category: 'Aprovisionamiento - Pregunta 15',
+    type: 'single',
+    question: 'En una obra de un edificio terciario, el montaje de cuadros eléctricos se retrasa porque el proveedor no entrega a tiempo. ¿Qué fallo previo se ha producido?',
+    options: [
+      'Error en el montaje',
+      'Error en las mediciones',
+      'Mala previsión del plazo de suministro.',
+      'Defectos de fabricación'
+    ],
+    correct: 2
+  },
+  {
+    id: 39, section: 'b2', category: 'Aprovisionamiento - Pregunta 16',
+    type: 'single',
+    question: 'Una correcta organización del proceso de aprovisionamiento permite:',
+    options: [
+      'Reducir la calidad.',
+      'Cumplir plazos, costes y calidad.',
+      'Improvisar en obra.',
+      'Eliminar la planificación'
+    ],
+    correct: 1
+  },
+  {
+    id: 40, section: 'b2', category: 'Aprovisionamiento - Pregunta 17',
+    type: 'single',
+    question: 'Una mala gestión del aprovisionamiento puede provocar:',
+    options: [
+      'Ningún efecto relevante',
+      'Únicamente retrasos.',
+      'Retrasos, sobrecostes y errores de montaje',
+      'Solo sobrecostes.'
+    ],
+    correct: 2
+  },
+  {
+    id: 41, section: 'b2', category: 'Aprovisionamiento - Pregunta 18',
+    type: 'single',
+    question: '¿Qué factor influye directamente en el coste indirecto de la instalación?',
+    options: [
+      'Las secciones de los conductores.',
+      'Los tipos de receptores instalados',
+      'El exceso de material almacenado.',
+      'La potencia instalada.'
+    ],
+    correct: 2
+  },
+  {
+    id: 42, section: 'b2', category: 'Aprovisionamiento - Pregunta 19',
+    type: 'single',
+    question: 'En una instalación fotovoltaica, los inversores tienen un plazo de entrega de 6 semanas. ¿Cómo debe planificarse su aprovisionamiento?',
+    options: [
+      'Con antelación, según la planificación.',
+      'En función del coste del proveedor.',
+      'Esperando al inicio del montaje',
+      'Tras recibir los paneles'
+    ],
+    correct: 0
+  },
+
+  // BLOQUE 3: UD 3 GESTIÓN DE ALMACÉN - ACTIVIDAD 1 (10 preguntas)
+  {
+    id: 43, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 1',
+    type: 'single',
+    question: 'Un pequeño almacén situado en zona estratégica que dispone de un stock reducido de los materiales que se utilizan con mayor frecuencia en el trabajo diario recibe el nombre de:',
+    options: ['Almacén Cross Docking', 'Almacén secundario', 'Almacén de tránsito', 'Almacén principal'],
+    correct: 1
+  },
+  {
+    id: 44, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 2',
+    type: 'single',
+    question: 'La zona en la que se agrupan los distintos materiales que requiere un pedido recibe el nombre de:',
+    options: ['Zona de entrada', 'Zona de almacenamiento', 'Zona de preparación o picking', 'Zona de cuarentena'],
+    correct: 2
+  },
+  {
+    id: 45, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 3',
+    type: 'single',
+    question: '¿En qué modelo de organización del almacén se ubican los bultos teniendo en cuenta solo el espacio disponible y no su tipo o modelo?',
+    options: ['Almacén organizado', 'Almacén caótico', 'Almacén vertical', 'Almacén horizontal'],
+    correct: 1
+  },
+  {
+    id: 46, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 4',
+    type: 'single',
+    question: 'Si la mercancía sale del almacén en orden inverso al que entró estamos hablando de un modelo:',
+    options: ['FIFO', 'FEFO', 'LIFO', 'HIFO'],
+    correct: 2
+  },
+  {
+    id: 47, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 5',
+    type: 'single',
+    question: 'La petición que realiza el personal encargado de la obra para que el almacén le suministre el material necesario recibe el nombre de:',
+    options: ['Pedido', 'Oferta', 'Albarán', 'Requisición'],
+    correct: 3
+  },
+  {
+    id: 48, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 6',
+    type: 'single',
+    question: 'Una RMA es:',
+    options: [
+      'Una técnica de gestión de almacenes americana',
+      'Una autorización para devolver mercancía averiada al fabricante',
+      'Un tipo de codificación de artículos',
+      'Ninguna de las respuestas anteriores es correcta'
+    ],
+    correct: 1
+  },
+  {
+    id: 49, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 7',
+    type: 'single',
+    question: 'El stock que la empresa mantiene para poder atender a picos de trabajo o a imprevistos en la recepción de pedidos recibe el nombre de:',
+    options: ['Stock óptimo', 'Stock máximo', 'Stock de seguridad', 'Stock mínimo'],
+    correct: 2
+  },
+  {
+    id: 50, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 8',
+    type: 'single',
+    question: 'El índice de rotura es una medida de:',
+    options: [
+      'Los artículos devueltos a fábrica con avería',
+      'Los pedidos que no han podido atenderse por no disponer de stock',
+      'Las veces que se ha renovado el inventario',
+      'El índice de materiales dañados en el almacén'
+    ],
+    correct: 1
+  },
+  {
+    id: 51, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 9',
+    type: 'single',
+    question: 'El método HIFO:',
+    options: [
+      'Valora el material saliente con el precio más alto',
+      'Valora el material saliente con el precio más bajo',
+      'Utiliza un precio estándar',
+      'No es una técnica de valoración de materiales'
+    ],
+    correct: 0
+  },
+  {
+    id: 52, section: 'b3', category: 'Ud 3: Gestión de Almacén (Act. 1) - Pregunta 10',
+    type: 'single',
+    question: 'El método de origen japonés que facilita el orden y control del almacén es:',
+    options: ['El método de Pareto', 'El método ABC', 'El método 5S', 'Todas las respuestas anteriores son correctas'],
+    correct: 2
+  },
+
+  // BLOQUE 4: DESARROLLO Y CÁLCULOS (Act. 2 y Act. 3)
+  {
+    id: 53, section: 'b4', category: 'Ud 3: Actividad 2 - Ejercicio 1 (Cálculo)',
+    type: 'open',
+    question: '¿Cuánto espacio expresado en largo, ancho y superficie necesitará un conjunto de 12 palés europeos dispuestos en dos filas de 6?',
+    guide: '<strong>Referencia para autoevaluación:</strong><br>• Dimensiones del palé europeo (EUR-EPAL): 1,20 m x 0,80 m (0,96 m² por palé).<br>• Superficie total de 12 palés: 12 × 0,96 m² = <strong>11,52 m²</strong>.<br>• <em>Disposición A (lado de 1,2 m en fila de 6):</em> Largo = 6 × 1,20 = 7,20 m | Ancho = 2 × 0,80 = 1,60 m.<br>• <em>Disposición B (lado de 0,8 m en fila de 6):</em> Largo = 6 × 0,80 = 4,80 m | Ancho = 2 × 1,20 = 2,40 m.'
+  },
+  {
+    id: 54, section: 'b4', category: 'Ud 3: Actividad 2 - Ejercicio 2 (Desarrollo)',
+    type: 'open',
+    question: '¿Qué ventajas e inconvenientes obtiene una empresa de instalaciones eléctricas por el hecho de disponer de un almacén propio?',
+    guide: '<strong>Puntos clave:</strong><br>• <strong>Ventajas:</strong> Disponibilidad inmediata de material crítico para urgencias o averías, descuentos por compra en volumen (economía de escala), mayor control de calidad y autonomía frente a retrasos de proveedores.<br>• <strong>Inconvenientes:</strong> Costes fijos elevados (alquiler, seguros, suministros, personal), capital inmovilizado en stock y riesgo de obsolescencia, robo o deterioro.'
+  },
+  {
+    id: 55, section: 'b4', category: 'Ud 3: Actividad 2 - Ejercicio 3 (Desarrollo)',
+    type: 'open',
+    question: '¿Qué ventajas e inconvenientes presenta el almacén aleatorio (caótico)? Indica un ejemplo de situación real en el que se utiliza esta técnica.',
+    guide: '<strong>Puntos clave:</strong><br>• <strong>Ventajas:</strong> Aprovechamiento máximo del espacio libre del almacén y rapidez en la ubicación de entradas.<br>• <strong>Inconvenientes:</strong> Requiere obligatoriamente un sistema informático (SGA) riguroso; si falla el registro, resulta muy difícil localizar el material.<br>• <strong>Ejemplo real:</strong> Centros logísticos de gran rotación (tipo Amazon o distribuidores mayoristas de material eléctrico automatizados).'
+  },
+  {
+    id: 56, section: 'b4', category: 'Ud 3: Actividad 2 - Ejercicio 4 (Desarrollo)',
+    type: 'open',
+    question: '¿Qué factores será necesario tener en cuenta para determinar la anchura de los pasillos de circulación de un almacén?',
+    guide: '<strong>Puntos clave:</strong><br>• Tipo y dimensiones de los medios de manutención (transpaleta manual, apilador, carretilla contrapesada o retráctil) y su radio de giro.<br>• Dimensiones máximas de las cargas o bobinas a transportar.<br>• Si la circulación es en sentido único o doble sentido y si existen pasos peatonales simultáneos.'
+  },
+  {
+    id: 57, section: 'b4', category: 'Ud 3: Actividad 2 - Ejercicio 5 (Cálculo)',
+    type: 'open',
+    question: `Una empresa de instalaciones eléctricas dispone en su almacén de 200 bobinas de 100 m de cable de cobre de 25 mm² que han sido adquiridas en los siguientes pedidos:<br>
+    a) Enero de 2011: 50 bobinas a 57,5 € cada una.<br>
+    b) Junio de 2011: 100 bobinas a 59,3 € cada una.<br>
+    c) Julio de 2012: 50 bobinas a 63,3 € cada una.<br><br>
+    Calcula el valor de salida de una bobina de cable de acuerdo a los siguientes métodos: <strong>PMP, FIFO, HIFO y LIFO</strong>.`,
+    guide: '<strong>Solución de referencia:</strong><br>• <strong>PMP (Precio Medio Ponderado):</strong> [(50 × 57,5) + (100 × 59,3) + (50 × 63,3)] / 200 = (2875 + 5930 + 3165) / 200 = 11970 / 200 = <strong>59,85 €</strong>.<br>• <strong>FIFO (Primera entrada, primera salida):</strong> Sale al precio de Enero de 2011 = <strong>57,50 €</strong>.<br>• <strong>HIFO (Precio más alto primero):</strong> Sale al precio más elevado (Julio de 2012) = <strong>63,30 €</strong>.<br>• <strong>LIFO (Última entrada, primera salida):</strong> Sale al precio del último lote (Julio de 2012) = <strong>63,30 €</strong>.'
+  },
+  {
+    id: 58, section: 'b4', category: 'Ud 3: Actividad 2 - Ejercicio 6 (Desarrollo)',
+    type: 'open',
+    question: '¿Qué ventajas e inconvenientes supone el uso de códigos de barras / QR frente a Tags RFID en un almacén?',
+    guide: '<strong>Puntos clave:</strong><br>• <strong>Códigos de barras / QR:</strong> Muy económicos y fáciles de imprimir (ventaja), pero requieren línea de visión directa uno a uno y pueden deteriorarse con suciedad o roces (inconveniente).<br>• <strong>Tags RFID:</strong> Permiten lectura simultánea a distancia sin visión directa y almacenan más información (ventaja), pero el coste por etiqueta y de los lectores es muy superior (inconveniente).'
+  },
+  {
+    id: 59, section: 'b4', category: 'Ud 3: Actividad 2 - Ejercicio 7 (Desarrollo)',
+    type: 'open',
+    question: '¿Qué problema ocasiona que el stock mínimo sea demasiado bajo? ¿Y demasiado alto?',
+    guide: '<strong>Puntos clave:</strong><br>• <strong>Demasiado bajo:</strong> Alto riesgo de rotura de stock, paralización de la obra e incumplimiento de plazos con el cliente.<br>• <strong>Demasiado alto:</strong> Exceso de capital inmovilizado, mayores costes de almacenamiento y riesgo de deterioro u obsolescencia del material.'
+  },
+  {
+    id: 60, section: 'b4', category: 'Ud 3: Actividad 3 - Coste de Almacenamiento (Cálculo)',
+    type: 'open',
+    question: `La empresa Instalaciones Maravilla SLU dispone de un almacén de 550 m² siendo su precio de alquiler de 2.300 € al mes.<br>
+    Entre otros productos, se encuentran 33 bobinas de cable de cobre de 90 mm² de sección que pesan 340 kg y ocupan 1,6 m², que pueden ser apiladas a dos alturas.<br><br>
+    Determinar:<br>
+    a) Coste de almacenamiento anual por m² ocupado.<br>
+    b) Superficie ocupada por las bobinas que nos ocupan.<br>
+    c) Coste de almacenamiento para cada bobina.`,
+    guide: '<strong>Solución paso a paso:</strong><br>• <strong>a) Coste anual por m²:</strong> Alquiler anual = 2.300 € × 12 meses = 27.600 €/año. Coste por m² = 27.600 € / 550 m² = <strong>50,18 €/m² al año</strong> (o 4,18 €/m² al mes).<br>• <strong>b) Superficie ocupada por las 33 bobinas:</strong> Al apilarse a 2 alturas, 33 / 2 = 16,5 → ocupan en planta el espacio de <strong>17 pilas</strong> (16 pilas de 2 bobinas + 1 bobina suelta). Superficie = 17 × 1,6 m² = <strong>27,2 m²</strong> (<em>Nota: si el profesor hace el cálculo teórico sin redondear pilas: 16,5 × 1,6 = 26,4 m²</em>).<br>• <strong>c) Coste de almacenamiento por bobina:</strong><br>  - Con 17 pilas (27,2 m²): Coste total anual = 27,2 m² × 50,1818 €/m² = 1.364,95 €/año → Entre 33 bobinas = <strong>41,36 €/año por bobina</strong> (3,45 €/mes).<br>  - Con cálculo teórico (26,4 m²): 26,4 × 50,1818 / 33 = <strong>40,15 €/año por bobina</strong> (3,35 €/mes).'
+  }
+];
+
+let state = {};
+let currentSection = 'all';
+
+function initQuiz() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+
+  const letters = ['a', 'b', 'c', 'd'];
+
+  questions.forEach((q) => {
+    if (currentSection !== 'all' && q.section !== currentSection) return;
+
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `q-card-${q.id}`;
+
+    let html = `
+      <div class="question-header">
+        <span class="badge">${q.category}</span>
+      </div>
+      <div class="question-title">${q.question}</div>
+      ${q.svg ? q.svg : ''}
+    `;
+
+    if (q.type === 'single') {
+      const answered = state[q.id];
+      html += `<div class="options-list">`;
+      q.options.forEach((opt, idx) => {
+        let btnClass = 'option-btn';
+        let disabled = '';
+        if (answered !== undefined) {
+          disabled = 'disabled';
+          if (idx === q.correct) btnClass += ' correct';
+          else if (idx === answered.selected && !answered.isCorrect) btnClass += ' incorrect';
+        }
+        html += `
+          <button class="${btnClass}" ${disabled} onclick="answerSingle(${q.id}, ${idx})">
+            <span class="option-letter">${letters[idx]}.</span>
+            <span>${opt}</span>
+          </button>
+        `;
+      });
+      html += `</div>`;
+
+      if (answered !== undefined) {
+        html += `<div class="feedback ${answered.isCorrect ? 'correct' : 'incorrect'}">
+          ${answered.isCorrect ? '✔ ¡Respuesta correcta!' : `✘ Respuesta incorrecta. La respuesta correcta es la (${letters[q.correct]}).`}
+        </div>`;
+      } else {
+        html += `<div class="feedback" id="feedback-${q.id}"></div>`;
+      }
+    } else if (q.type === 'multiple') {
+      const answered = state[q.id];
+      const tempSelected = (answered && answered.selected) ? answered.selected : [];
+      html += `<div class="options-list" id="multi-list-${q.id}">`;
+      q.options.forEach((opt, idx) => {
+        let btnClass = 'option-btn';
+        let disabled = '';
+        if (answered && answered.submitted) {
+          disabled = 'disabled';
+          if (q.correct.includes(idx)) btnClass += ' correct';
+          else if (tempSelected.includes(idx)) btnClass += ' incorrect';
+        } else if (tempSelected.includes(idx)) {
+          btnClass += ' selected-multi';
+        }
+        html += `
+          <button class="${btnClass}" ${disabled} onclick="toggleMulti(${q.id}, ${idx})">
+            <span class="option-letter">${letters[idx]}.</span>
+            <span>${opt}</span>
+          </button>
+        `;
+      });
+      html += `</div>`;
+
+      if (!answered || !answered.submitted) {
+        html += `<button class="verify-multi-btn" onclick="submitMulti(${q.id})">Comprobar respuesta</button>`;
+        html += `<div class="feedback" id="feedback-${q.id}"></div>`;
+      } else {
+        html += `<div class="feedback ${answered.isCorrect ? 'correct' : 'incorrect'}">
+          ${answered.isCorrect ? '✔ ¡Respuesta correcta! Has marcado todas las opciones válidas.' : '✘ Respuesta incompleta o incorrecta. Las opciones correctas son: a, c y d.'}
+        </div>`;
+      }
+    } else if (q.type === 'open') {
+      const savedText = (state[q.id] && state[q.id].text) ? state[q.id].text : '';
+      html += `
+        <textarea class="open-area" placeholder="Escribe aquí tu desarrollo, explicación o los cálculos paso a paso..." oninput="saveOpenText(${q.id}, this.value)">${savedText}</textarea>
+        <div>
+          <button class="guide-toggle" onclick="toggleGuide(${q.id})">👁️ Mostrar / Ocultar guía de resolución</button>
+          <div class="guide-box" id="guide-${q.id}">${q.guide}</div>
+        </div>
+      `;
+    }
+
+    card.innerHTML = html;
+    container.appendChild(card);
+  });
+
+  updateStats();
+}
+
+function answerSingle(qId, selectedIdx) {
+  const q = questions.find(item => item.id === qId);
+  if (!q || state[qId]) return;
+
+  const isCorrect = (selectedIdx === q.correct);
+  state[qId] = { selected: selectedIdx, isCorrect, submitted: true };
+  initQuiz();
+}
+
+function toggleMulti(qId, idx) {
+  if (!state[qId]) state[qId] = { selected: [], submitted: false };
+  if (state[qId].submitted) return;
+
+  const pos = state[qId].selected.indexOf(idx);
+  if (pos === -1) state[qId].selected.push(idx);
+  else state[qId].selected.splice(pos, 1);
+
+  initQuiz();
+}
+
+function submitMulti(qId) {
+  const q = questions.find(item => item.id === qId);
+  if (!state[qId] || state[qId].selected.length === 0) {
+    alert('Selecciona al menos una opción antes de comprobar.');
+    return;
+  }
+
+  const sel = state[qId].selected.slice().sort();
+  const cor = q.correct.slice().sort();
+  const isCorrect = (sel.length === cor.length && sel.every((v, i) => v === cor[i]));
+
+  state[qId].isCorrect = isCorrect;
+  state[qId].submitted = true;
+  initQuiz();
+}
+
+function saveOpenText(qId, val) {
+  state[qId] = { text: val };
+}
+
+function toggleGuide(qId) {
+  const box = document.getElementById(`guide-${qId}`);
+  if (box.style.display === 'block') {
+    box.style.display = 'none';
+  } else {
+    box.style.display = 'block';
+  }
+}
+
+function updateStats() {
+  const totalClosed = questions.filter(q => q.type !== 'open').length;
+  let answeredCount = 0;
+  let correctCount = 0;
+  let wrongCount = 0;
+
+  questions.forEach(q => {
+    if (q.type !== 'open' && state[q.id] && state[q.id].submitted) {
+      answeredCount++;
+      if (state[q.id].isCorrect) correctCount++;
+      else wrongCount++;
+    }
+  });
+
+  const score = totalClosed > 0 ? ((correctCount / totalClosed) * 10).toFixed(2) : '0.00';
+
+  document.getElementById('stat-total').textContent = totalClosed;
+  document.getElementById('stat-answered').textContent = answeredCount;
+  document.getElementById('stat-correct').textContent = correctCount;
+  document.getElementById('stat-wrong').textContent = wrongCount;
+  document.getElementById('stat-score').textContent = score;
+}
+
+function filterSection(sec, btn) {
+  currentSection = sec;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  initQuiz();
+}
+
+function resetQuiz() {
+  if (confirm('¿Quieres reiniciar todas tus respuestas y empezar de cero?')) {
+    state = {};
+    initQuiz();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+initQuiz();
+</script>
+
+</body>
+</html>
